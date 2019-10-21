@@ -1,12 +1,14 @@
-import React from 'react';
-import './App.css';
+import React, { useState } from "react";
 
 function App() {
+  const [item, setItoem] = useState(1);
+  const incrementItem = () => setItoem(item + 1);
+  const decrementItem = () => setItoem(item - 1);
   return (
     <div>
-      <header>
-
-      </header>
+      <h1>{item}</h1>
+      <button onClick={incrementItem}>+</button>
+      <button onClick={decrementItem}>-</button>
     </div>
   );
 }
