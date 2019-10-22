@@ -13,20 +13,22 @@ const content = [
   }
 ];
 const App =() => {
+  const {currentItem, changeItem} = useTab(0,content);
   const maxLen = value => value.length < 10 
   const noAt = value => !value.includes("@");
   const name = useInput("",maxLen,noAt) //길이먼저써야함
-  const {currentItem} = useTab(0,content);
+
   return (
-    <>
+    <div>
     <div>
       <input placeholder="Hello" {...name} />
     </div>
     <div>
-      {content.map(section =>(<button>{section.tab}</button>))}
+      {content.map((section,index) =>(<button onClick={()=> changeItem(index)} >{section.tab}</button>))}
       <div>{currentItem.content}</div>
     </div>
-    </>
+    </div>
+  
   );
 }
 
