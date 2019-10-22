@@ -1,36 +1,32 @@
-import React, { useState } from "react";
+import React from "react";
+import useInput from "./function/useInput/index"
+import useTab from "./function/useTabs/index"
 
-const useInput = (initialValue,validator) => {
-  const [value, setValue] = useState(initialValue);
-  const onChange = event => {
-    const {
-      target: { value }
-    } = event;
-    let willUpdate = true;
-    if (typeof validator === "function") {
-      willUpdate = validator(value);
-    }
-    if (willUpdate) {
-      setValue(value);
-    }
-  };  
-  return { value, onChange };
-};
+const content = [
+  {
+    tab: "Section1",
+    content: "Section1"
+  },
+  {
+    tab: "Section2",
+    content: "Section2"
+  }
+];
 const App =() => {
   const maxLen = value => value.length < 10 
   const noAt = value => !value.includes("@");
-  const name = useInput("",maxLen,noAt)
-
-  const [item, setItem] = useState(1);
-  const incrementItem = () => setItem(item + 1);
-  const decrementItem = () => setItem(item - 1);
+  const name = useInput("",maxLen,noAt) //길이먼저써야함
+  const {currentItem} = useTab(0,content);
   return (
+    <>
     <div>
       <input placeholder="Hello" {...name} />
-      <h1>{item}</h1>
-      <button onClick={incrementItem}>+</button>
-      <button onClick={decrementItem}>-</button>
     </div>
+    <div>
+      {content.map(section =>(<button>{section.tab}</button>))}
+      <div>{currentItem.content}</div>
+    </div>
+    </>
   );
 }
 
