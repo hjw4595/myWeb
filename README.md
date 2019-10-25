@@ -17,4 +17,7 @@ export const useTabs = (initialTab, allTabs) => {
   };
 
   React Hook "useState" is called conditionally. React Hooks must be called in the exact same order in every component render. Did you accidentally call a React Hook after an early return?
-  if문 끝나고 들어가는데 왜 에러가 뜨는지 모르겠음
+  if문 끝나고 들어가는데 왜 에러가 뜨는지 모르겠음 -> if문 위로 올림
+  
+  4.useEffect
+   = componentWillUpdate, componentDidUpdate , componentDidMount
