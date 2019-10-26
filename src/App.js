@@ -1,6 +1,8 @@
 import React from "react";
+import useTitle from "./function/useEffect/useTitle/index"
 import useInput from "./function/useInput/index"
 import useTab from "./function/useTabs/index"
+
 
 const content = [
   {
@@ -13,10 +15,15 @@ const content = [
   }
 ];
 const App =() => {
+  const titleUpdate = useTitle("Loading");
+  setTimeout(() => titleUpdate("HOME"), 5000)
+  //tab
   const {currentItem, changeItem} = useTab(0,content);
+  //input
   const maxLen = value => value.length < 10 
   const noAt = value => !value.includes("@");
   const name = useInput("",maxLen,noAt) //길이먼저써야함
+
 
   return (
     <div>
