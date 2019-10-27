@@ -1,5 +1,6 @@
 import React from "react";
 import useTitle from "./function/useEffect/useTitle/index"
+import useClick from "./function/useEffect/useClick/index"
 import useInput from "./function/useInput/index"
 import useTab from "./function/useTabs/index"
 
@@ -17,6 +18,11 @@ const content = [
 const App =() => {
   const titleUpdate = useTitle("Loading");
   setTimeout(() => titleUpdate("HOME"), 5000)
+
+  const clicked = () => {
+    console.log("CLICKED")
+  }
+  const clickUpdate = useClick(clicked);
   //tab
   const {currentItem, changeItem} = useTab(0,content);
   //input
@@ -29,6 +35,7 @@ const App =() => {
     <div>
     <div>
       <input placeholder="Hello" {...name} />
+      <h1 ref={ clickUpdate }>i want Click for you</h1>
     </div>
     <div>
       {content.map((section,index) =>(<button onClick={()=> changeItem(index)} >{section.tab}</button>))}
