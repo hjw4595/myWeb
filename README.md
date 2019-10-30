@@ -6,3 +6,5 @@ hooks = react의 state에 연결하는 방법 => class를 사용하지 않고 �
 4.useEffect
 5.useTitle
 6.useClick
+-add image 
+err 로컬 이미지를 불러오지 못함
