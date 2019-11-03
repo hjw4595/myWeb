@@ -5,6 +5,9 @@ import useInput from "./function/useInput/index"
 import useTab from "./function/useTabs/index"
 import useConfirm from "./function/useConfirm/index";
 import usePreventLeave from "./function/usePreventLeave/index" 
+import useBeforeLeave from "./function/useBeforeLeave";
+import useFadeIn from "./function/useFadeIn/index"
+import useNetwork from "./function/useNetwork/index";
 
 const content = [
   {
@@ -22,7 +25,9 @@ const App =() => {
   //confirm
   const deletWord = () => console.log("삭제")
   const protectWord = () => console.log("ss")
-  const confirmDeletWord = useConfirm("ok?", deletWord, protectWord)
+  const confirmDelet = useConfirm("ok?", deletWord, protectWord)
+
+  const {enablePrevent , disablePrevent} = usePreventLeave();
   //Title
   const titleUpdate = useTitle("Loading");
   setTimeout(() => titleUpdate("HOME"), 5000)
@@ -38,16 +43,28 @@ const App =() => {
   const maxLen = value => value.length < 10 
   const noAt = value => !value.includes("@");
   const name = useInput("",maxLen,noAt) //길이먼저써야함
-
+  //leavemouse
+  const beforLeave = () => {
+    console.log("leave mouse")
+  }
+  useBeforeLeave(beforLeave)
+  //fadein
+  const fadeIn = useFadeIn(5,3)//3초뒤에 5초동안 실행
+  //network
+  const onLine = useNetwork();
 
   return (
     <div>
+      <div>
+        <h1>{onLine ? "OnLine":"OffLine"}</h1>
+        <h1 {...fadeIn}> ㅎㅇ </h1>
+      </div>
     <div>
       <input placeholder="Hello" {...name} />
       <h1 id="demo" ref={ clickUpdate }>i want Click for you</h1>
-      <button onClick={confirmDeletWord}>delet all</button>
-      <button onClick={usePreventLeave.enablePrevent}>protect</button>
-      <button onClick={usePreventLeave.disablePrevent}>unprotect</button>
+      <button onClick={confirmDelet}>delet all</button>
+      <button onClick={enablePrevent}>protect</button>
+      <button onClick={disablePrevent}>unprotect</button>
     </div>
 
     <div>

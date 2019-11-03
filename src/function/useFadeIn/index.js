@@ -1,1 +1,1 @@
-export { useFadeIn as default } from "./useConfirm";
+export { useFadeIn as default } from "./useFadeIn";
