@@ -8,6 +8,10 @@ import usePreventLeave from "./function/usePreventLeave/index"
 import useBeforeLeave from "./function/useBeforeLeave";
 import useFadeIn from "./function/useFadeIn/index"
 import useNetwork from "./function/useNetwork/index";
+import { useScroll } from "./function/useScroll/useScroll";
+import { useFullscreen } from "./function/useFullscreen/useFullscreen";
+import useNotification from "./function/useNotification";
+
 
 const content = [
   {
@@ -52,12 +56,23 @@ const App =() => {
   const fadeIn = useFadeIn(5,3)//3초뒤에 5초동안 실행
   //network
   const onLine = useNetwork();
-
+  //scroll
+  const { y } = useScroll()
+  //FullScreen
+  const {element ,triggerFull, exitFull} = useFullscreen()
+  //notification
+  const notification = useNotification("i'm notification", {
+    body:"context"
+  })
   return (
     <div>
       <div>
         <h1>{onLine ? "OnLine":"OffLine"}</h1>
         <h1 {...fadeIn}> ㅎㅇ </h1>
+        <button onClick={notification}>note</button>
+      </div>
+      <div style= {{height : "100vh"}}>
+        <h2 style= {{position: "fixed", color: y > 50 ? "red" : "blue"}}>scroll</h2>
       </div>
     <div>
       <input placeholder="Hello" {...name} />
@@ -70,8 +85,11 @@ const App =() => {
     <div>
       {content.map((section,index) =>(<button onClick={()=> changeItem(index)} >{section.tab}</button>))}
       <div>{currentItem.content}</div>
-      <img alt="1" src={currentItem.image} width="200" height="200"/>
-      
+      <div ref={element} width="200" height="200">
+      <img alt="1" src={currentItem.image}/>
+      <button onClick={triggerFull}>make FullScreen</button>
+      <button onClick={exitFull}>exit</button>
+      </div>
     </div>
 
     </div>
