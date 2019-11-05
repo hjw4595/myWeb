@@ -11,6 +11,7 @@ import useNetwork from "./function/useNetwork/index";
 import { useScroll } from "./function/useScroll/useScroll";
 import { useFullscreen } from "./function/useFullscreen/useFullscreen";
 import useNotification from "./function/useNotification";
+import useAxios from "./function/useAxios/index"
 
 
 const content = [
@@ -64,15 +65,21 @@ const App =() => {
   const notification = useNotification("i'm notification", {
     body:"context"
   })
+  //axios
+  const {loading , data, error , refetch} = useAxios(
+    {
+      url:"https://yts.lt/api/v2/list_movies.json"
+    })
+    console.log(`Loading... ${loading}\nData:${JSON.stringify(data)}\nError:${error}`)
   return (
     <div>
       <div>
         <h1>{onLine ? "OnLine":"OffLine"}</h1>
         <h1 {...fadeIn}> ㅎㅇ </h1>
         <button onClick={notification}>note</button>
-      </div>
-      <div style= {{height : "100vh"}}>
-        <h2 style= {{position: "fixed", color: y > 50 ? "red" : "blue"}}>scroll</h2>
+      </div>11
+      <div style= {{height : "10vh"}}>
+        <h2 style= {{position: "fixed", color: y > 5 ? "red" : "blue"}}>scroll</h2>
       </div>
     <div>
       <input placeholder="Hello" {...name} />
@@ -83,6 +90,7 @@ const App =() => {
     </div>
 
     <div>
+      <button onClick={refetch}>refetch</button>
       {content.map((section,index) =>(<button onClick={()=> changeItem(index)} >{section.tab}</button>))}
       <div>{currentItem.content}</div>
       <div ref={element} width="200" height="200">
