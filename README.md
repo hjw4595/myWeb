@@ -8,5 +8,8 @@ hooks = react의 state에 연결하는 방법 => class를 사용하지 않고 �
 6.useClick
 7.useConfirm / err
 -add image 
-err 로컬 이미지를 불러오지 못함
+err 로컬 이미지를 불러오지 못함 
+8.usefullscreen
+9.confirm online/offline 
+10.useaxios
 
